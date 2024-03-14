@@ -52,5 +52,5 @@ void loop() {
     Serial.println(fanSpeed);
   }
 
-  delay(100); // Adjust delay as needed
+  delay(100); // For testing purposes
 }
