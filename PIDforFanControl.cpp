@@ -3,6 +3,8 @@
 // Define pin numbers for distance sensor and motor fan
 const int distanceSensorPin = A0;
 const int fanSpeedPin = 9;
+const String START_COMMAND = "start";
+const String STOP_COMMAND = "stop";
 
 // Define variables for PID control
 double Setpoint = 20; // Set the desired distance
@@ -22,13 +24,13 @@ void setup() {
   myPID.SetMode(AUTOMATIC);
 }
 
-void loop() {
-  // Check if start or stop command received from ROS
+void loop() { 
+  // Check if start or stop command received from ROS (This part need the be checked before using.)
   if (Serial.available() > 0) {
-    char command = Serial.read();
-    if (command == 'start') {
+    String command = Serial.readStringUntil('\n');
+    if (command == Start_Command) {
       isRunning = true;
-    } else if (command == 'stop') {
+    } else if (command == Stop_Command) {
       isRunning = false;
       // Stop the fan
       analogWrite(fanSpeedPin, 0);
